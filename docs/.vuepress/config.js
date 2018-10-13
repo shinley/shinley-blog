@@ -1,6 +1,7 @@
 module.exports = {
   title: '陈新磊技术博客',
   description: 'Just playing around',
+  base: '/shinley-blog/',
   themeConfig: {
     sidebarDepth: 2,
     displayAllHeaders: true,
@@ -15,10 +16,9 @@ module.exports = {
       },
       {
         title: 'MySQL',
+        collapsable: false,
         children: [ 
-          '/mysql/index',
-          ''
-          /* ... */ 
+          '/mysql/suoyin'
         ]
       }
     ]

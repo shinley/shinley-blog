@@ -1,5 +1,5 @@
 module.exports = {
-  title: '陈新磊技术博客',
+  title: '陈新磊的技术博客',
   description: 'Just playing around',
   base: '/',
   themeConfig: {

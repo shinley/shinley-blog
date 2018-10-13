@@ -1,11 +1,31 @@
 module.exports = {
   title: '陈新磊技术博客',
   description: 'Just playing around',
-  base: '/shinley-blog/',
+  base: '/',
   themeConfig: {
     sidebarDepth: 2,
     displayAllHeaders: true,
+    nav: [
+      { text: 'Home', link: '/' },
+      { text: 'Guide', link: '/guide/' },
+      { text: 'External', link: 'https://google.com' },
+      {
+        text: 'Languages',
+        items: [
+          { text: 'Chinese', link: '/language/chinese' },
+          { text: 'Japanese', link: '/language/japanese' }
+        ]
+      }
+    ],
     sidebar: [
+      {
+        title: 'Python',
+        collapsable: false,
+        children: [
+          '/python/fabric',
+          '/python/subprocess'
+        ]
+      },
       {
         title: 'JAVA',
         collapsable: false,

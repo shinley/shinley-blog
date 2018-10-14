@@ -1,1 +1,11 @@
-# Fabric自动化部署
+# 自动化部署Fabric
+Fabric是一个基于python(python2.7, python3.4+)实现的SSH命令行工具库，使用它可以非常方便的执行应用部署和系统管理操作。它提供了基础的操作组件， 可以方便的进行本地和远程shell命令的执行，文件上、下载以及完整执行日志输出。 
+
+Fabric的作者也是paramiko的作者， 可以理解为Fabric是在paramiko的基础上做了更高一层的封装， 操作起来更加方便、简单。
+
+## Fabric安装
+```
+pip install fabric
+```
+
+## Fabric使用入门

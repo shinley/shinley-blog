@@ -32,4 +32,8 @@ def ls(path='.'):
 def tail(path='/etc/passwd', line=10):
     sudo('tail -n {0} {1}'.format(line, path))
 ```
-下面我们使用fab命令执行这个文件， 当fab命令执行时，会在当前目录下
+下面我们使用fab命令执行这个文件， 当fab命令执行时，默认引用当前目录下的fabfile.py文件， 我们也可以通过 `-f` 参数指定其它名称的文件。
+在这个例子中， 我们使用了Fabric提供的三个指令， 分别是 run、sudo、env, 作用如下:
+- run :执行远程命令
+- sudo : 以sudo权限执行远程命令
+- env： 保存配置信息的字典 

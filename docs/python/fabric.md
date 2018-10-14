@@ -3,13 +3,19 @@ Fabric是一个基于python(python2.7, python3.4+)实现的SSH命令行工具库
 
 Fabric的作者也是paramiko的作者， 可以理解为Fabric是在paramiko的基础上做了更高一层的封装， 操作起来更加方便、简单。
 
+Fabric既是一个python库， 也是一个命令行工具， 它的命令行工是不是Fabric， 而是fab. 
 ## Fabric安装
 ```Bash
 pip install fabric
 ```
+安装完成以后，在命令行执行以下命令，验证Fabric是否安装正确
+```Bash
+fab --help
+```
+如果能正常输出，说明安装正确。
 
 ## Fabric使用入门
-
+新建fabfile.py文件，输入以下内容：
 ```python
 from fabric.api import run, sudo, env
 

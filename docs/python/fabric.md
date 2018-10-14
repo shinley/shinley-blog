@@ -19,7 +19,7 @@ fab --help
 ```python
 from fabric.api import run, sudo, env
 
-env.hosts = ['192.168.1.100', '192.168.1.100']
+env.hosts = ['192.168.1.100', '192.168.1.101']
 env.port = 22
 env.user = 'shinley'
 
@@ -32,3 +32,4 @@ def ls(path='.'):
 def tail(path='/etc/passwd', line=10):
     sudo('tail -n {0} {1}'.format(line, path))
 ```
+下面我们使用fab命令执行这个文件， 当fab命令执行时，会在当前目录下

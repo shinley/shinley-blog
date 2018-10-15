@@ -40,7 +40,8 @@ module.exports = {
         title: 'MySQL',
         collapsable: false,
         children: [ 
-          '/mysql/suoyin'
+          '/mysql/1.Install-MySQL5.7.22',
+          '/mysql/2.MySQL-User-Manager'
         ]
       }
     ]

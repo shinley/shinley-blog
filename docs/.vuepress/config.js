@@ -23,6 +23,7 @@ module.exports = {
         collapsable: false,
         children: [
           '/python/fabric',
+          '/python/subprocess',
           '/python/subprocess'
         ]
       },
@@ -31,7 +32,7 @@ module.exports = {
         collapsable: false,
         children: [
           '/java/jvm',
-          '/java/spring'
+          '/java/thread'
         ]
       },
       {

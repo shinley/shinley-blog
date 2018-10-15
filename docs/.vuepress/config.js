@@ -24,7 +24,8 @@ module.exports = {
         children: [
           '/python/fabric',
           '/python/subprocess',
-          '/python/pexpect'
+          '/python/pexpect',
+          '/python/crashzip'
         ]
       },
       {

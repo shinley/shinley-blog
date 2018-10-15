@@ -24,7 +24,7 @@ module.exports = {
         children: [
           '/python/fabric',
           '/python/subprocess',
-          '/python/subprocess'
+          '/python/pexpect'
         ]
       },
       {

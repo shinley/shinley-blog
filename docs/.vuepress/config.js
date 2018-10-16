@@ -41,7 +41,9 @@ module.exports = {
         collapsable: false,
         children: [ 
           '/mysql/1.Install-MySQL5.7.22',
-          '/mysql/2.MySQL-User-Manager'
+          '/mysql/2.MySQL-User-Manager',
+          '/mysql/3.MySQL备份与还原',
+          '/mysql/4.七种连接方式'
         ]
       }
     ]

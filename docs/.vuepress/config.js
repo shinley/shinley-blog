@@ -4,7 +4,6 @@ module.exports = {
   base: '/',
   themeConfig: {
     sidebarDepth: 2,
-    displayAllHeaders: true,
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Guide', link: '/guide/' },
@@ -45,7 +44,12 @@ module.exports = {
           '/mysql/3.MySQL备份与还原',
           '/mysql/4.七种连接方式',
           '/mysql/5.MySQL索引01',
-          '/mysql/6.MySQL索引02'
+          '/mysql/6.MySQL索引02',
+          '/mysql/7.单表优化案例',
+          '/mysql/8.两表和三表优化案例',
+          '/mysql/9.索引优化01',
+          '/mysql/10.索引优化02',
+          
         ]
       }
     ]

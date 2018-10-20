@@ -10,5 +10,5 @@ features:
   details: java虚拟机和多线程的笔记。
 - title: Mysql
   details: 学习mysql索引知识，性能优化。
-footer:  Copyright © 2018-present shinlei.com
+footer:  Copyright © 2018-present shinley.com
 ---

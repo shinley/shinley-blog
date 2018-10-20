@@ -49,6 +49,18 @@ module.exports = {
           '/mysql/8.两表和三表优化案例',
           '/mysql/9.索引优化01',
           '/mysql/10.索引优化02',
+          '/mysql/11.索引优化03',
+          '/mysql/12.索引优化04',
+          '/mysql/13.索引优化05',
+          '/mysql/14.索引优化06',
+          '/mysql/15.索引优化07',
+          '/mysql/16.索引优化08',
+          '/mysql/17.索引面试题',
+          '/mysql/18.小表驱动大表',
+          '/mysql/19.order by关键字优化',
+          '/mysql/20.慢查询日志分析',
+          '/mysql/21.批量数据脚本',
+          '/mysql/22.Show Profile',
           
         ]
       }

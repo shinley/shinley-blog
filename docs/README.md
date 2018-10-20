@@ -1,7 +1,7 @@
 ---
 home: true
 heroImage: /hero.png
-actionText: 起步 →
+actionText: Let's Go →
 actionLink: /python/fabric
 features:
 - title: Python

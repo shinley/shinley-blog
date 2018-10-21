@@ -5,16 +5,9 @@ module.exports = {
   themeConfig: {
     sidebarDepth: 2,
     nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Guide', link: '/guide/' },
-      { text: 'External', link: 'https://google.com' },
-      {
-        text: 'Languages',
-        items: [
-          { text: 'Chinese', link: '/language/chinese' },
-          { text: 'Japanese', link: '/language/japanese' }
-        ]
-      }
+      { text: '主页', link: '/' },
+      { text: 'MongoDB', link: '/mongodb/' },
+      { text: 'Redis', link: '/redis/' }
     ],
     sidebar: [
       {

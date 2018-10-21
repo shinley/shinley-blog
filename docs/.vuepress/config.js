@@ -5,7 +5,7 @@ module.exports = {
   themeConfig: {
     sidebarDepth: 2,
     nav: [
-      { text: '主页', link: '/' },
+      { text: '主页', link: '/python/fabric' },
       { text: 'MongoDB', link: '/mongodb/' },
       { text: 'Redis', link: '/redis/' }
     ],

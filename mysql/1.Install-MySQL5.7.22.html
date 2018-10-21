@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>1. MySQL 5.7.22安装 | 陈新磊的读书笔记</title>
+    <meta name="description" content="Just playing around">
+    
+    
+    <link rel="preload" href="/assets/css/styles.f518d815.css" as="style"><link rel="preload" href="/assets/js/app.f518d815.js" as="script"><link rel="preload" href="/assets/js/8.d2d6cb3f.js" as="script"><link rel="prefetch" href="/assets/js/16.a05f5c53.js"><link rel="prefetch" href="/assets/css/1.styles.5a8ea794.css"><link rel="prefetch" href="/assets/js/1.5a8ea794.js"><link rel="prefetch" href="/assets/css/2.styles.cf289c67.css"><link rel="prefetch" href="/assets/js/2.cf289c67.js"><link rel="prefetch" href="/assets/js/3.ebd152b3.js"><link rel="prefetch" href="/assets/js/4.17531713.js"><link rel="prefetch" href="/assets/js/5.af9e6587.js"><link rel="prefetch" href="/assets/js/6.fc925cca.js"><link rel="prefetch" href="/assets/js/7.603902a0.js"><link rel="prefetch" href="/assets/js/9.1b044dfa.js"><link rel="prefetch" href="/assets/js/10.931c5de7.js"><link rel="prefetch" href="/assets/js/11.c02b6a22.js"><link rel="prefetch" href="/assets/js/12.905af051.js"><link rel="prefetch" href="/assets/js/13.43b353fc.js"><link rel="prefetch" href="/assets/js/14.6b313113.js"><link rel="prefetch" href="/assets/js/15.f92f208f.js"><link rel="prefetch" href="/assets/js/17.f7e63732.js"><link rel="prefetch" href="/assets/js/18.cfdb5582.js"><link rel="prefetch" href="/assets/js/19.f9c23d6f.js"><link rel="prefetch" href="/assets/js/20.ca5cacc5.js"><link rel="prefetch" href="/assets/js/21.b9a3f6bf.js"><link rel="prefetch" href="/assets/js/22.ad52503d.js"><link rel="prefetch" href="/assets/js/23.b50655b8.js"><link rel="prefetch" href="/assets/js/24.ae33eca4.js"><link rel="prefetch" href="/assets/js/25.35319afc.js"><link rel="prefetch" href="/assets/js/26.14cfb51c.js"><link rel="prefetch" href="/assets/js/27.6d00f7aa.js"><link rel="prefetch" href="/assets/js/28.9adb62e6.js"><link rel="prefetch" href="/assets/js/29.96b612e5.js"><link rel="prefetch" href="/assets/js/30.d16089d8.js"><link rel="prefetch" href="/assets/js/31.833984b0.js"><link rel="prefetch" href="/assets/js/32.0f873b57.js"><link rel="prefetch" href="/assets/js/33.e1a966ad.js"><link rel="prefetch" href="/assets/js/34.1e435d13.js"><link rel="prefetch" href="/assets/js/35.400e2100.js">
+    <link rel="stylesheet" href="/assets/css/1.styles.5a8ea794.css"><link rel="stylesheet" href="/assets/css/2.styles.cf289c67.css"><link rel="stylesheet" href="/assets/css/styles.f518d815.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">陈新磊的读书笔记</span></a> <div class="links" style="max-width:nullpx;"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/python/fabric.html" class="nav-link">主页</a></div><div class="nav-item"><a href="/mongodb/" class="nav-link">MongoDB</a></div><div class="nav-item"><a href="/redis/" class="nav-link">Redis</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/python/fabric.html" class="nav-link">主页</a></div><div class="nav-item"><a href="/mongodb/" class="nav-link">MongoDB</a></div><div class="nav-item"><a href="/redis/" class="nav-link">Redis</a></div> <!----></nav>  <ul class="sidebar-links"><li><div class="sidebar-group first"><p class="sidebar-heading"><span>Python</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/python/fabric.html" class="sidebar-link">自动化部署工具Fabric</a></li><li><a href="/python/subprocess.html" class="sidebar-link">Subprocess调用shell命令</a></li><li><a href="/python/pexpect.html" class="sidebar-link">自动化交互式的命令行pexpect</a></li><li><a href="/python/crashzip.html" class="sidebar-link">暴力破解zip压缩包的密码</a></li></ul></div></li><li><div class="sidebar-group"><p class="sidebar-heading"><span>JAVA</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/java/jvm.html" class="sidebar-link">JVM性能调优</a></li><li><a href="/java/thread.html" class="sidebar-link">多线程</a></li></ul></div></li><li><div class="sidebar-group"><p class="sidebar-heading open"><span>MySQL</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/mysql/1.Install-MySQL5.7.22.html" class="active sidebar-link">1. MySQL 5.7.22安装</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/mysql/1.Install-MySQL5.7.22.html#下载tar包" class="sidebar-link">下载tar包</a></li><li class="sidebar-sub-header"><a href="/mysql/1.Install-MySQL5.7.22.html#创建用户" class="sidebar-link">创建用户</a></li><li class="sidebar-sub-header"><a href="/mysql/1.Install-MySQL5.7.22.html#创建目录" class="sidebar-link">创建目录</a></li><li class="sidebar-sub-header"><a href="/mysql/1.Install-MySQL5.7.22.html#创建-my-cnf" class="sidebar-link">创建 my.cnf</a></li><li class="sidebar-sub-header"><a href="/mysql/1.Install-MySQL5.7.22.html#拷贝my-cnf到-etc-下（拷贝后这个文件为root-root）" class="sidebar-link">拷贝my.cnf到/etc/下（拷贝后这个文件为root:root）</a></li><li class="sidebar-sub-header"><a href="/mysql/1.Install-MySQL5.7.22.html#初始化" class="sidebar-link">初始化</a></li><li class="sidebar-sub-header"><a href="/mysql/1.Install-MySQL5.7.22.html#获取生成的临时密码" class="sidebar-link">获取生成的临时密码</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/mysql/1.Install-MySQL5.7.22.html#删除测试数据库" class="sidebar-link">删除测试数据库</a></li></ul></li></ul></li><li><a href="/mysql/2.MySQL-User-Manager.html" class="sidebar-link">2. MySQL 用户管理</a></li><li><a href="/mysql/3.MySQL备份与还原.html" class="sidebar-link">3.MySql备份与还原</a></li><li><a href="/mysql/4.七种连接方式.html" class="sidebar-link">4.七种连接方式</a></li><li><a href="/mysql/5.MySQL索引01.html" class="sidebar-link">5.MySQL索引（一）</a></li><li><a href="/mysql/6.MySQL索引02.html" class="sidebar-link">6.MySQL索引(二)</a></li><li><a href="/mysql/7.单表优化案例.html" class="sidebar-link">7.单表优化案例</a></li><li><a href="/mysql/8.两表和三表优化案例.html" class="sidebar-link">8. 两表和三表优化案例</a></li><li><a href="/mysql/9.索引优化01.html" class="sidebar-link">9.索引优化(一)</a></li><li><a href="/mysql/10.索引优化02.html" class="sidebar-link">10.索引优化(二)</a></li><li><a href="/mysql/11.索引优化03.html" class="sidebar-link">11. 索引优化(三)</a></li><li><a href="/mysql/12.索引优化04.html" class="sidebar-link">12. 索引优化(四)</a></li><li><a href="/mysql/13.索引优化05.html" class="sidebar-link">13.索引优化(五)</a></li><li><a href="/mysql/14.索引优化06.html" class="sidebar-link">14. 索引优化(六)</a></li><li><a href="/mysql/15.索引优化07.html" class="sidebar-link">15.索引优化(七)</a></li><li><a href="/mysql/16.索引优化08.html" class="sidebar-link">16.索引优化(八)</a></li><li><a href="/mysql/17.索引面试题.html" class="sidebar-link">17.索引面试题</a></li><li><a href="/mysql/18.小表驱动大表.html" class="sidebar-link">18.小表驱动大表</a></li><li><a href="/mysql/19.order by关键字优化.html" class="sidebar-link">19.order by关键字优化</a></li><li><a href="/mysql/20.慢查询日志分析.html" class="sidebar-link">20.慢查询日志分析</a></li><li><a href="/mysql/21.批量数据脚本.html" class="sidebar-link">21.批量数据脚本</a></li><li><a href="/mysql/22.Show Profile.html" class="sidebar-link">22.Show Profile</a></li></ul></div></li></ul> </div> <div class="page"> <div class="content"><h1 id="_1-mysql-5-7-22安装"><a href="#_1-mysql-5-7-22安装" aria-hidden="true" class="header-anchor">#</a> 1. MySQL 5.7.22安装</h1> <h2 id="下载tar包"><a href="#下载tar包" aria-hidden="true" class="header-anchor">#</a> 下载tar包</h2> <h1 id="安装依赖"><a href="#安装依赖" aria-hidden="true" class="header-anchor">#</a> 安装依赖</h1> <div class="language-bash extra-class"><pre class="language-bash"><code>apt <span class="token function">install</span> libaio 
+</code></pre></div><h2 id="创建用户"><a href="#创建用户" aria-hidden="true" class="header-anchor">#</a> 创建用户</h2> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">groupadd</span> mysql
+<span class="token function">useradd</span> -r -g mysql -s /bin/false mysql
+</code></pre></div><h2 id="创建目录"><a href="#创建目录" aria-hidden="true" class="header-anchor">#</a> 创建目录</h2> <div class="language-bash extra-class"><pre class="language-bash"><code>shell<span class="token operator">&gt;</span> <span class="token function">mkdir</span> -p /usr/local/mysql/<span class="token punctuation">{</span>data,log,etc,run<span class="token punctuation">}</span>
+shell<span class="token operator">&gt;</span> <span class="token function">chown</span> -R mysql:mysql /usr/local/mysql
+shell<span class="token operator">&gt;</span> <span class="token function">chmod</span> 750 /usr/local/mysql/<span class="token punctuation">{</span>data,log,etc,run<span class="token punctuation">}</span>
+</code></pre></div><h2 id="创建-my-cnf"><a href="#创建-my-cnf" aria-hidden="true" class="header-anchor">#</a> 创建 my.cnf</h2> <div class="language-text extra-class"><pre class="language-text"><code>[client]
+port = 3306
+socket = /usr/local/mysql/run/mysql.sock
+
+[mysqld]
+port = 3306
+socket = /usr/local/mysql/run/mysql.sock
+pid_file = /usr/local/mysql/run/mysql.pid
+basedir = /usr/local/mysql/
+datadir = /usr/local/mysql/data
+default_storage_engine = InnoDB
+max_allowed_packet = 128M
+max_connections = 2048
+open_files_limit = 65535
+
+#skip-name-resolve
+lower_case_table_names=1
+
+character-set-server = utf8mb4
+collation-server = utf8mb4_unicode_ci
+init_connect='SET NAMES utf8mb4'
+
+
+innodb_buffer_pool_size = 128M
+innodb_log_file_size = 128M
+innodb_file_per_table = 1
+innodb_flush_log_at_trx_commit = 0
+
+
+key_buffer_size = 16M
+
+log-error = /usr/local/mysql/log/mysql_error.log
+log-bin = /usr/local/mysql/log/mysql_bin.log
+slow_query_log = 1
+slow_query_log_file =/usr/local/mysql/log/mysql_slow_query.log
+long_query_time = 5
+
+
+tmp_table_size = 16M
+max_heap_table_size = 16M
+query_cache_type = 0
+query_cache_size = 0
+
+server-id=1
+
+</code></pre></div><h2 id="拷贝my-cnf到-etc-下（拷贝后这个文件为root-root）"><a href="#拷贝my-cnf到-etc-下（拷贝后这个文件为root-root）" aria-hidden="true" class="header-anchor">#</a> 拷贝my.cnf到/etc/下（拷贝后这个文件为root:root）</h2> <div class="language-bash extra-class"><pre class="language-bash"><code>shell<span class="token operator">&gt;</span> <span class="token function">cp</span> /usr/local/mysql/etc/my.cnf /etc/
+</code></pre></div><h2 id="初始化"><a href="#初始化" aria-hidden="true" class="header-anchor">#</a> 初始化</h2> <div class="language-bash extra-class"><pre class="language-bash"><code>mysqld --initialize --user<span class="token operator">=</span>mysql   --basedir<span class="token operator">=</span>/usr/local/mysql --datadir<span class="token operator">=</span>/usr/local/mysql/data
+</code></pre></div><h2 id="获取生成的临时密码"><a href="#获取生成的临时密码" aria-hidden="true" class="header-anchor">#</a> 获取生成的临时密码</h2> <p>生成一个临时密码，可以在mysql_error.log文件找到</p> <div class="language-bash extra-class"><pre class="language-bash"><code>shell<span class="token operator">&gt;</span> <span class="token function">grep</span> <span class="token string">'temporary password'</span> /usr/local/mysql/log/mysql_error.log 
+
+</code></pre></div><h1 id="配置服务"><a href="#配置服务" aria-hidden="true" class="header-anchor">#</a> 配置服务</h1> <p>配置服务，使用systemctl管理</p> <div class="language-bash extra-class"><pre class="language-bash"><code>shell<span class="token operator">&gt;</span> <span class="token function">cd</span> /lib/systemd/system
+shell<span class="token operator">&gt;</span> <span class="token function">touch</span> mysqld.service 
+
+</code></pre></div><p>mysqld.service</p> <div class="language- extra-class"><pre class="language-text"><code># Copyright (c) 2015, 2016, Oracle and/or its affiliates. All rights reserved.
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; version 2 of the License.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
+#
+# systemd service file for MySQL forking server
+#
+
+[Unit]
+Description=MySQL Server
+Documentation=man:mysqld(8)
+Documentation=http://dev.mysql.com/doc/refman/en/using-systemd.html
+After=network.target
+After=syslog.target
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+User=mysql
+Group=mysql
+
+Type=forking
+
+PIDFile=/usr/local/mysql/run/mysql.pid
+
+# Disable service start and stop timeout logic of systemd for mysqld service.
+TimeoutSec=0
+
+# Execute pre and post scripts as root
+PermissionsStartOnly=true
+
+# Needed to create system tables
+#ExecStartPre=/usr/bin/mysqld_pre_systemd
+
+# Start main service
+ExecStart=/usr/local/mysql/bin/mysqld --daemonize --pid-file=/usr/local/mysql/run/mysql.pid $MYSQLD_OPTS
+
+# Use this to switch malloc implementation
+EnvironmentFile=-/etc/sysconfig/mysql
+
+# Sets open_files_limit
+LimitNOFILE = 65535
+
+Restart=on-failure
+
+RestartPreventExitStatus=1
+
+PrivateTmp=false
+
+</code></pre></div><h1 id="加载配置服务"><a href="#加载配置服务" aria-hidden="true" class="header-anchor">#</a> 加载配置服务</h1> <p>让systemctl加载配置服务</p> <div class="language-bash extra-class"><pre class="language-bash"><code>shell<span class="token operator">&gt;</span> systemctl daemon-reload
+shell<span class="token operator">&gt;</span> systemctl <span class="token function">enable</span> mysqld.service （设置开机启动）
+shell<span class="token operator">&gt;</span> systemctl is-enabled mysqld
+</code></pre></div><p>启动MySQL服务</p> <div class="language-bash extra-class"><pre class="language-bash"><code>shell<span class="token operator">&gt;</span> systemctl start mysqld.service
+</code></pre></div><h1 id="mysql用户初始化"><a href="#mysql用户初始化" aria-hidden="true" class="header-anchor">#</a> MySQL用户初始化</h1> <ul><li>重置密码 (用到上面日志文件中生成的初始密码:ibF&lt;RpDX!9wR)</li></ul> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token operator">&gt;</span>mysql -uroot -p系统生成的密码
+SET PASSWORD <span class="token operator">=</span> PASSWORD<span class="token punctuation">(</span><span class="token string">'123456'</span><span class="token punctuation">)</span>
+</code></pre></div><ul><li>删除匿名用户</li> <li>关闭root用户的远程登录</li></ul> <h3 id="删除测试数据库"><a href="#删除测试数据库" aria-hidden="true" class="header-anchor">#</a> 删除测试数据库</h3> <div class="language-bash extra-class"><pre class="language-bash"><code>shell<span class="token operator">&gt;</span> /usr/local/mysql/bin/mysql_secure_installation
+</code></pre></div></div> <div class="page-edit"><!----> <!----></div> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/java/thread.html" class="prev">
+          多线程
+        </a></span> <span class="next"><a href="/mysql/2.MySQL-User-Manager.html">
+          2. MySQL 用户管理
+        </a>
+        →
+      </span></p></div> </div> <!----></div></div>
+    <script src="/assets/js/8.d2d6cb3f.js" defer></script><script src="/assets/js/app.f518d815.js" defer></script>
+  </body>
+</html>

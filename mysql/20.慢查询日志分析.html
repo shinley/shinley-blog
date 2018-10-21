@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>20.慢查询日志分析 | 陈新磊的读书笔记</title>
+    <meta name="description" content="Just playing around">
+    
+    
+    <link rel="preload" href="/assets/css/styles.f518d815.css" as="style"><link rel="preload" href="/assets/js/app.f518d815.js" as="script"><link rel="preload" href="/assets/js/20.ca5cacc5.js" as="script"><link rel="prefetch" href="/assets/js/16.a05f5c53.js"><link rel="prefetch" href="/assets/css/1.styles.5a8ea794.css"><link rel="prefetch" href="/assets/js/1.5a8ea794.js"><link rel="prefetch" href="/assets/css/2.styles.cf289c67.css"><link rel="prefetch" href="/assets/js/2.cf289c67.js"><link rel="prefetch" href="/assets/js/3.ebd152b3.js"><link rel="prefetch" href="/assets/js/4.17531713.js"><link rel="prefetch" href="/assets/js/5.af9e6587.js"><link rel="prefetch" href="/assets/js/6.fc925cca.js"><link rel="prefetch" href="/assets/js/7.603902a0.js"><link rel="prefetch" href="/assets/js/8.d2d6cb3f.js"><link rel="prefetch" href="/assets/js/9.1b044dfa.js"><link rel="prefetch" href="/assets/js/10.931c5de7.js"><link rel="prefetch" href="/assets/js/11.c02b6a22.js"><link rel="prefetch" href="/assets/js/12.905af051.js"><link rel="prefetch" href="/assets/js/13.43b353fc.js"><link rel="prefetch" href="/assets/js/14.6b313113.js"><link rel="prefetch" href="/assets/js/15.f92f208f.js"><link rel="prefetch" href="/assets/js/17.f7e63732.js"><link rel="prefetch" href="/assets/js/18.cfdb5582.js"><link rel="prefetch" href="/assets/js/19.f9c23d6f.js"><link rel="prefetch" href="/assets/js/21.b9a3f6bf.js"><link rel="prefetch" href="/assets/js/22.ad52503d.js"><link rel="prefetch" href="/assets/js/23.b50655b8.js"><link rel="prefetch" href="/assets/js/24.ae33eca4.js"><link rel="prefetch" href="/assets/js/25.35319afc.js"><link rel="prefetch" href="/assets/js/26.14cfb51c.js"><link rel="prefetch" href="/assets/js/27.6d00f7aa.js"><link rel="prefetch" href="/assets/js/28.9adb62e6.js"><link rel="prefetch" href="/assets/js/29.96b612e5.js"><link rel="prefetch" href="/assets/js/30.d16089d8.js"><link rel="prefetch" href="/assets/js/31.833984b0.js"><link rel="prefetch" href="/assets/js/32.0f873b57.js"><link rel="prefetch" href="/assets/js/33.e1a966ad.js"><link rel="prefetch" href="/assets/js/34.1e435d13.js"><link rel="prefetch" href="/assets/js/35.400e2100.js">
+    <link rel="stylesheet" href="/assets/css/1.styles.5a8ea794.css"><link rel="stylesheet" href="/assets/css/2.styles.cf289c67.css"><link rel="stylesheet" href="/assets/css/styles.f518d815.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">陈新磊的读书笔记</span></a> <div class="links" style="max-width:nullpx;"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/python/fabric.html" class="nav-link">主页</a></div><div class="nav-item"><a href="/mongodb/" class="nav-link">MongoDB</a></div><div class="nav-item"><a href="/redis/" class="nav-link">Redis</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/python/fabric.html" class="nav-link">主页</a></div><div class="nav-item"><a href="/mongodb/" class="nav-link">MongoDB</a></div><div class="nav-item"><a href="/redis/" class="nav-link">Redis</a></div> <!----></nav>  <ul class="sidebar-links"><li><div class="sidebar-group first"><p class="sidebar-heading"><span>Python</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/python/fabric.html" class="sidebar-link">自动化部署工具Fabric</a></li><li><a href="/python/subprocess.html" class="sidebar-link">Subprocess调用shell命令</a></li><li><a href="/python/pexpect.html" class="sidebar-link">自动化交互式的命令行pexpect</a></li><li><a href="/python/crashzip.html" class="sidebar-link">暴力破解zip压缩包的密码</a></li></ul></div></li><li><div class="sidebar-group"><p class="sidebar-heading"><span>JAVA</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/java/jvm.html" class="sidebar-link">JVM性能调优</a></li><li><a href="/java/thread.html" class="sidebar-link">多线程</a></li></ul></div></li><li><div class="sidebar-group"><p class="sidebar-heading open"><span>MySQL</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/mysql/1.Install-MySQL5.7.22.html" class="sidebar-link">1. MySQL 5.7.22安装</a></li><li><a href="/mysql/2.MySQL-User-Manager.html" class="sidebar-link">2. MySQL 用户管理</a></li><li><a href="/mysql/3.MySQL备份与还原.html" class="sidebar-link">3.MySql备份与还原</a></li><li><a href="/mysql/4.七种连接方式.html" class="sidebar-link">4.七种连接方式</a></li><li><a href="/mysql/5.MySQL索引01.html" class="sidebar-link">5.MySQL索引（一）</a></li><li><a href="/mysql/6.MySQL索引02.html" class="sidebar-link">6.MySQL索引(二)</a></li><li><a href="/mysql/7.单表优化案例.html" class="sidebar-link">7.单表优化案例</a></li><li><a href="/mysql/8.两表和三表优化案例.html" class="sidebar-link">8. 两表和三表优化案例</a></li><li><a href="/mysql/9.索引优化01.html" class="sidebar-link">9.索引优化(一)</a></li><li><a href="/mysql/10.索引优化02.html" class="sidebar-link">10.索引优化(二)</a></li><li><a href="/mysql/11.索引优化03.html" class="sidebar-link">11. 索引优化(三)</a></li><li><a href="/mysql/12.索引优化04.html" class="sidebar-link">12. 索引优化(四)</a></li><li><a href="/mysql/13.索引优化05.html" class="sidebar-link">13.索引优化(五)</a></li><li><a href="/mysql/14.索引优化06.html" class="sidebar-link">14. 索引优化(六)</a></li><li><a href="/mysql/15.索引优化07.html" class="sidebar-link">15.索引优化(七)</a></li><li><a href="/mysql/16.索引优化08.html" class="sidebar-link">16.索引优化(八)</a></li><li><a href="/mysql/17.索引面试题.html" class="sidebar-link">17.索引面试题</a></li><li><a href="/mysql/18.小表驱动大表.html" class="sidebar-link">18.小表驱动大表</a></li><li><a href="/mysql/19.order by关键字优化.html" class="sidebar-link">19.order by关键字优化</a></li><li><a href="/mysql/20.慢查询日志分析.html" class="active sidebar-link">20.慢查询日志分析</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/mysql/20.慢查询日志分析.html#查看是否开启" class="sidebar-link">查看是否开启</a></li><li class="sidebar-sub-header"><a href="/mysql/20.慢查询日志分析.html#开启" class="sidebar-link">开启</a></li><li class="sidebar-sub-header"><a href="/mysql/20.慢查询日志分析.html#开启了慢查询日志后，什么样的sql才会记录到慢查询日志里面呢？" class="sidebar-link">开启了慢查询日志后，什么样的SQL才会记录到慢查询日志里面呢？</a></li><li class="sidebar-sub-header"><a href="/mysql/20.慢查询日志分析.html#模拟慢查询，延迟4秒" class="sidebar-link">模拟慢查询，延迟4秒</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/mysql/20.慢查询日志分析.html#得到返回记录集最多的10个sql" class="sidebar-link">得到返回记录集最多的10个SQL</a></li><li class="sidebar-sub-header"><a href="/mysql/20.慢查询日志分析.html#得到访问次数最多的10个sql" class="sidebar-link">得到访问次数最多的10个SQL</a></li><li class="sidebar-sub-header"><a href="/mysql/20.慢查询日志分析.html#得到按照时间排序的前10条里面含有左连接的查询语句" class="sidebar-link">得到按照时间排序的前10条里面含有左连接的查询语句</a></li><li class="sidebar-sub-header"><a href="/mysql/20.慢查询日志分析.html#另外建议在使用这些命令时结合-和more使用，否则有可能出现爆屏情况" class="sidebar-link">另外建议在使用这些命令时结合 | 和more使用，否则有可能出现爆屏情况</a></li></ul></li></ul></li><li><a href="/mysql/21.批量数据脚本.html" class="sidebar-link">21.批量数据脚本</a></li><li><a href="/mysql/22.Show Profile.html" class="sidebar-link">22.Show Profile</a></li></ul></div></li></ul> </div> <div class="page"> <div class="content"><h1 id="_20-慢查询日志分析"><a href="#_20-慢查询日志分析" aria-hidden="true" class="header-anchor">#</a> 20.慢查询日志分析</h1> <ul><li>1.MySQL的慢查询日志是MySQL提供的一种日志记录，它用来记录在MySQL中响应时间超过阈值的语句，具体指运行时间超过long_query_time值的SQL,则会被记录到慢查询日志中。</li> <li>具体指运行时间超过long_query_time值的,则会被记录到慢查询日志中。long_query_time的默认值为10，意转是运行10秒以上的语句</li> <li>由他来查看哪些SQL超出了我们的最大忍耐时间值，比如一条SQL执行超过5秒钏，我们就算慢SQL,希望能搜集超过5秒的SQL,结合explain进行全面分析。</li></ul> <p>默认情况下，MySQL数据库没有开启慢查询日志，需要我们手动来设置这个参数。</p> <p>当然如果不是调优需要的话，一般不建议启动该参数，因为开启慢查询日志或多或少带来一定的性能影响。慢查询日志支持将日志记录写入文件。</p> <h2 id="查看是否开启"><a href="#查看是否开启" aria-hidden="true" class="header-anchor">#</a> 查看是否开启</h2> <div class="language-sql extra-class"><pre class="language-sql"><code>mysql<span class="token operator">&gt;</span> <span class="token keyword">SHOW</span> VARIABLES <span class="token operator">LIKE</span> <span class="token string">'%slow_query_log%'</span><span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">---------------------+---------------------------------+</span>
+<span class="token operator">|</span> Variable_name       <span class="token operator">|</span> <span class="token keyword">Value</span>                           <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">---------------------+---------------------------------+</span>
+<span class="token operator">|</span> slow_query_log      <span class="token operator">|</span> <span class="token keyword">OFF</span>                             <span class="token operator">|</span>
+<span class="token operator">|</span> slow_query_log_file <span class="token operator">|</span> <span class="token operator">/</span>var<span class="token operator">/</span>lib<span class="token operator">/</span>mysql<span class="token operator">/</span>shinley<span class="token operator">-</span>slow<span class="token punctuation">.</span>log <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">---------------------+---------------------------------+</span>
+<span class="token number">2</span> <span class="token keyword">rows</span> <span class="token operator">in</span> <span class="token keyword">set</span> <span class="token punctuation">(</span><span class="token number">0.01</span> sec<span class="token punctuation">)</span>
+
+</code></pre></div><h2 id="开启"><a href="#开启" aria-hidden="true" class="header-anchor">#</a> 开启</h2> <p>只对当前数据库生效，重启后失效</p> <div class="language-sql extra-class"><pre class="language-sql"><code>mysql<span class="token operator">&gt;</span> <span class="token keyword">set</span> <span class="token keyword">global</span> slow_query_log<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+Query OK<span class="token punctuation">,</span> <span class="token number">0</span> <span class="token keyword">rows</span> affected <span class="token punctuation">(</span><span class="token number">0.00</span> sec<span class="token punctuation">)</span>
+
+mysql<span class="token operator">&gt;</span> <span class="token keyword">SHOW</span> VARIABLES <span class="token operator">LIKE</span> <span class="token string">'%slow_query_log%'</span><span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">---------------------+---------------------------------+</span>
+<span class="token operator">|</span> Variable_name       <span class="token operator">|</span> <span class="token keyword">Value</span>                           <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">---------------------+---------------------------------+</span>
+<span class="token operator">|</span> slow_query_log      <span class="token operator">|</span> <span class="token keyword">ON</span>                              <span class="token operator">|</span>
+<span class="token operator">|</span> slow_query_log_file <span class="token operator">|</span> <span class="token operator">/</span>var<span class="token operator">/</span>lib<span class="token operator">/</span>mysql<span class="token operator">/</span>shinley<span class="token operator">-</span>slow<span class="token punctuation">.</span>log <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">---------------------+---------------------------------+</span>
+<span class="token number">2</span> <span class="token keyword">rows</span> <span class="token operator">in</span> <span class="token keyword">set</span> <span class="token punctuation">(</span><span class="token number">0.00</span> sec<span class="token punctuation">)</span>
+
+</code></pre></div><p>如果要永久生效，就必须修改配置文件my.cnf</p> <p>修改my.cnf文件，[mysqld]下增加或修改参数slow_query_log和slow_query_log_file后，然后重启MySQL服务器</p> <div class="language-text extra-class"><pre class="language-text"><code>slow_query_log=1
+slow_query_log_file=/var/lib/mysql/mysql-slow.log
+
+</code></pre></div><h2 id="开启了慢查询日志后，什么样的sql才会记录到慢查询日志里面呢？"><a href="#开启了慢查询日志后，什么样的sql才会记录到慢查询日志里面呢？" aria-hidden="true" class="header-anchor">#</a> 开启了慢查询日志后，什么样的SQL才会记录到慢查询日志里面呢？</h2> <p>这个参数是由 long_query_time控制，默认情况下long_query_time的值为10秒</p> <p>命令：</p> <div class="language-sql extra-class"><pre class="language-sql"><code>mysql<span class="token operator">&gt;</span> <span class="token keyword">SHOW</span> VARIABLES <span class="token operator">LIKE</span><span class="token string">'%long_query_time%'</span><span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">-----------------+-----------+</span>
+<span class="token operator">|</span> Variable_name   <span class="token operator">|</span> <span class="token keyword">Value</span>     <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----------------+-----------+</span>
+<span class="token operator">|</span> long_query_time <span class="token operator">|</span> <span class="token number">10.000000</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----------------+-----------+</span>
+<span class="token number">1</span> <span class="token keyword">row</span> <span class="token operator">in</span> <span class="token keyword">set</span> <span class="token punctuation">(</span><span class="token number">0.01</span> sec<span class="token punctuation">)</span>
+
+</code></pre></div><p>修改时间： 修改后看不出变化，需要重新打开终端，再次查看，才能看到效果。</p> <div class="language-sql extra-class"><pre class="language-sql"><code>mysql<span class="token operator">&gt;</span> <span class="token keyword">set</span> <span class="token keyword">global</span> long_query_time<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">;</span>
+Query OK<span class="token punctuation">,</span> <span class="token number">0</span> <span class="token keyword">rows</span> affected <span class="token punctuation">(</span><span class="token number">0.00</span> sec<span class="token punctuation">)</span>
+
+mysql<span class="token operator">&gt;</span> <span class="token keyword">SHOW</span> VARIABLES <span class="token operator">LIKE</span><span class="token string">'%long_query_time%'</span><span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">-----------------+-----------+</span>
+<span class="token operator">|</span> Variable_name   <span class="token operator">|</span> <span class="token keyword">Value</span>     <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----------------+-----------+</span>
+<span class="token operator">|</span> long_query_time <span class="token operator">|</span> <span class="token number">10.000000</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----------------+-----------+</span>
+<span class="token number">1</span> <span class="token keyword">row</span> <span class="token operator">in</span> <span class="token keyword">set</span> <span class="token punctuation">(</span><span class="token number">0.00</span> sec<span class="token punctuation">)</span>
+</code></pre></div><p>重新打开终端查看</p> <div class="language-sql extra-class"><pre class="language-sql"><code>mysql<span class="token operator">&gt;</span> <span class="token keyword">show</span> variables <span class="token operator">like</span> <span class="token string">'%long_query_time%'</span><span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">-----------------+----------+</span>
+<span class="token operator">|</span> Variable_name   <span class="token operator">|</span> <span class="token keyword">Value</span>    <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----------------+----------+</span>
+<span class="token operator">|</span> long_query_time <span class="token operator">|</span> <span class="token number">3.000000</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----------------+----------+</span>
+<span class="token number">1</span> <span class="token keyword">row</span> <span class="token operator">in</span> <span class="token keyword">set</span> <span class="token punctuation">(</span><span class="token number">0.00</span> sec<span class="token punctuation">)</span>
+</code></pre></div><p>或者直接加 global查看</p> <div class="language-sql extra-class"><pre class="language-sql"><code>mysql<span class="token operator">&gt;</span> <span class="token keyword">show</span> variables <span class="token operator">like</span> <span class="token string">'%long_query_time%'</span><span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">-----------------+----------+</span>
+<span class="token operator">|</span> Variable_name   <span class="token operator">|</span> <span class="token keyword">Value</span>    <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----------------+----------+</span>
+<span class="token operator">|</span> long_query_time <span class="token operator">|</span> <span class="token number">3.000000</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----------------+----------+</span>
+<span class="token number">1</span> <span class="token keyword">row</span> <span class="token operator">in</span> <span class="token keyword">set</span> <span class="token punctuation">(</span><span class="token number">0.00</span> sec<span class="token punctuation">)</span>
+
+mysql<span class="token operator">&gt;</span> <span class="token keyword">show</span> <span class="token keyword">global</span>  variables <span class="token operator">like</span> <span class="token string">'%long_query_time%'</span><span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">-----------------+----------+</span>
+<span class="token operator">|</span> Variable_name   <span class="token operator">|</span> <span class="token keyword">Value</span>    <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----------------+----------+</span>
+<span class="token operator">|</span> long_query_time <span class="token operator">|</span> <span class="token number">0.300000</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----------------+----------+</span>
+<span class="token number">1</span> <span class="token keyword">row</span> <span class="token operator">in</span> <span class="token keyword">set</span> <span class="token punctuation">(</span><span class="token number">0.01</span> sec<span class="token punctuation">)</span>
+
+</code></pre></div><p>可以使用命令修改，也可以在my.cnf参数里面修改。</p> <p>如果运行时间正好等于设置的时间，并不会记录下来。只有大于设置的时间才会记录。</p> <p>【mysqld】下配置</p> <div class="language-text extra-class"><pre class="language-text"><code>slow_query_log=1;
+slow_query_log_file=/var/lib/mysql/shinley-slow.log
+long_query_time=3;
+log_out_put=FILE;
+
+</code></pre></div><h2 id="模拟慢查询，延迟4秒"><a href="#模拟慢查询，延迟4秒" aria-hidden="true" class="header-anchor">#</a> 模拟慢查询，延迟4秒</h2> <div class="language-sql extra-class"><pre class="language-sql"><code>mysql<span class="token operator">&gt;</span> <span class="token keyword">select</span> sleep<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">----------+</span>
+<span class="token operator">|</span> sleep<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">----------+</span>
+<span class="token operator">|</span>        <span class="token number">0</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">----------+</span>
+<span class="token number">1</span> <span class="token keyword">row</span> <span class="token operator">in</span> <span class="token keyword">set</span> <span class="token punctuation">(</span><span class="token number">4.00</span> sec<span class="token punctuation">)</span>
+
+</code></pre></div><h1 id="查询当前系统中有多少条慢查询记录"><a href="#查询当前系统中有多少条慢查询记录" aria-hidden="true" class="header-anchor">#</a> 查询当前系统中有多少条慢查询记录</h1> <div class="language-sql extra-class"><pre class="language-sql"><code>mysql<span class="token operator">&gt;</span> <span class="token keyword">show</span> <span class="token keyword">global</span> <span class="token keyword">status</span> <span class="token operator">like</span> <span class="token string">'%slow_queries%'</span><span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">---------------+-------+</span>
+<span class="token operator">|</span> Variable_name <span class="token operator">|</span> <span class="token keyword">Value</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">---------------+-------+</span>
+<span class="token operator">|</span> Slow_queries  <span class="token operator">|</span> <span class="token number">1</span>     <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">---------------+-------+</span>
+<span class="token number">1</span> <span class="token keyword">row</span> <span class="token operator">in</span> <span class="token keyword">set</span> <span class="token punctuation">(</span><span class="token number">0.00</span> sec<span class="token punctuation">)</span>
+</code></pre></div><h1 id="日志分析工具-mysqldumpslow"><a href="#日志分析工具-mysqldumpslow" aria-hidden="true" class="header-anchor">#</a> 日志分析工具 mysqldumpslow</h1> <p>查看帮助</p> <div class="language-text extra-class"><pre class="language-text"><code>shinley@shinley:~$ mysqldumpslow -h;
+Option h requires an argument
+ERROR: bad option
+
+Usage: mysqldumpslow [ OPTS... ] [ LOGS... ]
+
+Parse and summarize the MySQL slow query log. Options are
+
+  --verbose    verbose
+  --debug      debug
+  --help       write this text to standard output
+
+  -v           verbose
+  -d           debug
+  -s ORDER     what to sort by (al, at, ar, c, l, r, t), 'at' is default
+                al: average lock time
+                ar: average rows sent
+                at: average query time
+                 c: count
+                 l: lock time
+                 r: rows sent
+                 t: query time  
+  -r           reverse the sort order (largest last instead of first)
+  -t NUM       just show the top n queries
+  -a           don't abstract all numbers to N and strings to 'S'
+  -n NUM       abstract numbers with at least n digits within names
+  -g PATTERN   grep: only consider stmts that include this string
+  -h HOSTNAME  hostname of db server for *-slow.log filename (can be wildcard),
+               default is '*', i.e. match all
+  -i NAME      name of server instance (if using mysql.server startup script)
+  -l           don't subtract lock time from total time
+</code></pre></div><ul><li>s: 是表示按照何种方式排序</li> <li>c:访问次数</li> <li>l:锁定时间</li> <li>r:返回记录</li> <li>t:查询时间</li> <li>al:平均锁定时间</li> <li>ar:平均返回记录数</li> <li>at:平均查询时间</li> <li>t:即为返回前面多少条数据</li> <li>g:后面搭配一个正则匹配模式，大小写不敏感的；</li></ul> <h3 id="得到返回记录集最多的10个sql"><a href="#得到返回记录集最多的10个sql" aria-hidden="true" class="header-anchor">#</a> 得到返回记录集最多的10个SQL</h3> <div class="language-sql extra-class"><pre class="language-sql"><code>mysqldumpslow <span class="token operator">-</span>s r <span class="token operator">-</span>t <span class="token number">10</span> <span class="token operator">/</span>var<span class="token operator">/</span>lib<span class="token operator">/</span>mysql<span class="token operator">/</span>shinley<span class="token operator">-</span>slow<span class="token punctuation">.</span>log
+</code></pre></div><h3 id="得到访问次数最多的10个sql"><a href="#得到访问次数最多的10个sql" aria-hidden="true" class="header-anchor">#</a> 得到访问次数最多的10个SQL</h3> <div class="language-sql extra-class"><pre class="language-sql"><code>mysqldumpslow <span class="token operator">-</span>s c <span class="token operator">-</span>t <span class="token number">10</span> <span class="token operator">/</span>var<span class="token operator">/</span>lib<span class="token operator">/</span>mysql<span class="token operator">/</span>shinley<span class="token operator">-</span>slow<span class="token punctuation">.</span>log
+
+</code></pre></div><h3 id="得到按照时间排序的前10条里面含有左连接的查询语句"><a href="#得到按照时间排序的前10条里面含有左连接的查询语句" aria-hidden="true" class="header-anchor">#</a> 得到按照时间排序的前10条里面含有左连接的查询语句</h3> <div class="language-sql extra-class"><pre class="language-sql"><code>mysqldumpslow <span class="token operator">-</span>s t <span class="token operator">-</span>t <span class="token number">10</span> <span class="token operator">-</span>g <span class="token string">&quot;left join&quot;</span> <span class="token operator">/</span>var<span class="token operator">/</span>lib<span class="token operator">/</span>mysql<span class="token operator">/</span>shinley<span class="token operator">-</span>slow<span class="token punctuation">.</span>log
+</code></pre></div><h3 id="另外建议在使用这些命令时结合-和more使用，否则有可能出现爆屏情况"><a href="#另外建议在使用这些命令时结合-和more使用，否则有可能出现爆屏情况" aria-hidden="true" class="header-anchor">#</a> 另外建议在使用这些命令时结合 | 和more使用，否则有可能出现爆屏情况</h3> <div class="language-sql extra-class"><pre class="language-sql"><code>mysqldumpslow <span class="token operator">-</span>s r <span class="token operator">-</span>t <span class="token number">10</span> <span class="token operator">/</span>var<span class="token operator">/</span>lib<span class="token operator">/</span>mysql<span class="token operator">/</span>shinley<span class="token operator">-</span>slow<span class="token punctuation">.</span>log
+</code></pre></div></div> <div class="page-edit"><!----> <!----></div> <!----> </div> <!----></div></div>
+    <script src="/assets/js/20.ca5cacc5.js" defer></script><script src="/assets/js/app.f518d815.js" defer></script>
+  </body>
+</html>

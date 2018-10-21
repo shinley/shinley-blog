@@ -325,5 +325,33 @@ db.dropDatabase();  删除当前所在的数据库
 > db
 ```
 
+## 5.逻辑运算
+逻辑运算主要就是三种类型 
 
+- 与（$and） 
+- 或（$or）
+- 非（$not、$nor）
 
+范例：查询年龄在19~20岁的学生
+```sql
+db.students.find({"age":{"$gte":19,"$lte":20}}).pretty();
+```
+范例：查询不是19岁的学生
+```sql
+db.students.find({"age":{"$ne":19}});
+```
+
+范例： 查询年龄大于19岁，或者成绩大于90分的学生信息
+```sql
+db.student.find({"$or":[
+    {"age":{"$gt":19}},
+    {"score":{"$gt":90}}
+]}).pretty();;
+```
+范例：也可以进行求反的操作
+```sql
+db.student.find({"$nor":[
+    {"age":{"$gt":19}},
+    {"score":{"$gt":90}}
+]}).pretty();
+```

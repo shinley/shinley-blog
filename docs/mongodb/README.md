@@ -355,3 +355,295 @@ db.student.find({"$nor":[
     {"score":{"$gt":90}}
 ]}).pretty();
 ```
+
+## 6.条件过滤 $where
+
+范例：查询年龄大于20岁的人
+```sql
+db.students.find({"where":"this.age>20"});
+```
+简写为:
+```sql
+db.students.find("this.age>20");
+```
+对数据量大的查询不适用。
+
+
+## 7.范围查询
+
+- $in  在范围 中      
+- $nin 不在范围中
+
+范例：查询姓名是 张三，李四、王五的信息
+
+```sql
+db.student.find({"name":{"$in":["张三","李四","王五"]}}).pretty();
+```
+
+不在范围的查询
+```sql
+db.student.find({"name":{"$nin":["张三","李四","王五"]}}).pretty();
+```
+
+
+## 8.分页显示
+
+- skip(n) 表示跨过多少数据
+- limit(n) 表示取出的数据个数
+
+例：分页显示（第一页skip(0) ,limit(5)）
+
+```sql
+db.students.find().skip(0).limit(5).sort({"age":-1});
+```
+
+## 嵌套集合运算
+在MongoDB数据里面每一个集合数据可以继续保存其它的集合数据
+```sql
+db.user.insert({
+                "name":"张三"，
+                "parents":[
+                            {
+                            "name":"父亲",
+                            "age":51,
+                            "job":"局长"
+                            },
+                            {
+                            "name":"母亲",
+                            "age":50,
+                            "job":"工人"
+                            }
+                        ]});
+```
+
+此时给出的内容是嵌套集合，而这种集合的数据判断只能通过$elemtMatch
+
+范例：查询出年龄大于等于19岁并且父母有人是局长的信息
+```sql
+db.students.find({"$and"
+    [
+        {"age":{"gte":19}},
+        {"parents":{"$elemMatch":{"job":"局长"}}}
+    ]
+}).pretty();
+```
+
+## 10.求模运算
+模的运算使用 $mod  来完成。 
+
+语法：
+```sql
+{ $mod:[数字，余数]}
+
+db.students.find({"age":{"$mod":[20,0]}}).pretty();
+```
+## 11.删除数据
+使用remove
+- 参数1 ：删除条件：满足条件的数据被删除
+- 参数2 ：是否只删除一条数据，如果设为true或1，则只删除一条数据
+
+范例：清空infos的数据. 
+```sql
+db.infos.remove({});     // 注意参数带一对花括号，匹配所有对象
+```
+范例：删除所有姓名带有“谷”的信息
+
+```sql
+db.students.remove({"name":/谷/});
+```
+
+范例： 删除姓名带有高的信息，要求只删一个
+```sql
+db.students.remove({"name":/高/}，true);
+```
+删除集合
+```
+db.students.drop();
+```
+## 12.数据更新操作
+MongoDB对于数据的更新提供了两类函数：
+- save()
+- update()
+
+使用update()方法  最常用的方式
+
+语法：
+```sql
+db.集合.update(更新条件，新的对象数据，upsert, multi);
+```
+    upsert     如果数据不存在，则新增一条数据， true 为新增 false 为不增加
+    multi        表示是否只更新 满足条件的第一条记录，如果设置为false,只更新第一条，如果为true 全部更新
+
+范例：将年龄是19岁的人的成绩更新为100分
+```sql
+    db.students.update({"age":19},{"$set":{"score":100}},false,false);   //只更新一行
+    db.students.update({"age":19},{"$set":{"score":100}},false,false);  //更新所有满足条件的
+```
+范例： 更新不存在的数据
+```sql
+    db.students.update({"age":30},{"$set":{"name":"不存在"}},true,false);
+```
+
+由于不存在30岁的学生信息，upsert又设置为true，所以会新增一条
+
+使用save()方法更新
+```sql
+db.students.save({"_id":ObjectedId("xxx"),"age":50});
+```
+
+对应的id数据如果存在，就会更新数据，如果不存在，就会新增数据
+
+## 13.数据排序
+
+ MongoDB使用 sort() 函数  
+- 升序  1 
+- 降序 -1
+
+范例：成绩降序排序
+```
+db.students.find().sort({"score":-1}).pretty();
+```
+
+自然排序： 使用数据库保存的顺序 
+
+```
+db.students.find().sort({"$natural": -1}).pretty();
+```
+
+## 14.数组
+造数据：
+```sql
+db.students.insert({"name":"学霸"，"age":20,"course":["语文","数学","英语","物理","物理"]});
+```
+
+范例：查询同时参加语文和数学课程的学生
+```sql
+db.students.find("course":{"$all":["语文","数学"]});
+```
+$all 可以用在数组上，也可以用在一个数据的匹配上
+范例：查询学生地址是海淀区的信息
+```sql
+db.students.find({"address":{"$all":[海淀区]}});
+```
+范例：查询数组中第二个内容为数学的信息
+```sql
+db.students.find({"course.1":"数学"});
+```
+范例：查询出只参加两门课程的学生
+```sql
+db.students.find({"course":{"$size":2}})
+```
+范例： 查询年龄为19岁，且只显示两门参加的课程
+```sql
+db.students.find({"age":19},{"course":{"$slice":2}});
+```
+以上是取前两门的课程 ，也可以取后两门的课程 $slice值为 -2
+```sql
+db.students.find({"age":19},{"course":{"$slice":-2}});
+```
+或者取中间部分的信息
+```sql
+db.students.find({"age":19},{"course":{"$slice":[1,2]}});
+```
+以上第一个数字，表示跳过的数据量，
+第二个数字，表示返回的数据量
+
+# 修改器
+
+
+数据的修秘诀会牵涉到内容的变更，结构的变更，所以就有了修改器
+ 1. $inc    
+主要针对一个数字字段，增加某个数字字段
+        语法：{"$inc":{"成员"："内容"}}
+范例：将所有19岁的人成绩减少30分,年龄加1
+db.students.update({"age":19},{"$inc":{"score":-30,"age":1}},false,true);
+
+ 2. $set      
+进行内容的重新设
+
+语法：
+```sql
+{"$set":{"成员":"内容"}}
+```
+范例：将所有年龄20岁的人，分数改为89
+```sql
+db.students.update({"age":20},{"$set":{"score":89}});
+```
+ 3. $unset 
+删除某个成员
+语法：
+```sql
+{"$unset":{"成员":"内容"}}
+```
+范例：将张三的年龄和分数信息删除
+```sql
+db.students.update({"name":"张三"},{"$unset":{"age":1,"score":1}});
+```
+4. $push 
+将内容追加到指定的成员中（基本上是数组）
+语法：
+```sql
+{"$push":{"成员":"内容"}}
+```
+范例：向张三添加课程信息
+```sql
+db.students.update({"name":"张三"}，{"$push":{"course":"语文"}});
+```
+5. $pushAll 一次追加多个内容到数组中
+语法：
+```sql
+${"$pushAll":{"成员":数组内容}}
+```
+范例：向王五的信息里添加多个课程内容
+```sql
+db.students.update({"name":"王五"}，{"$pushAll":{"course":["美术","音乐"]}});
+```
+6. $addToSet 
+向数组里面增加一个新的内容，只有当内容不存在时才会增加
+
+语法： 
+```sql
+{"$addToSet":{"成员":"内容"}}
+```
+范例：向王五的信息增加新的内容
+```sql
+db.students.update({"name":"王五"}，{"$addToSet":{"course":"美术"}});
+```
+7. $pop 删除数据内的数组
+语法：
+```sql
+{"$pop":{"成员":"内容"}} 内容如果设置为-1 ，删除第一个，1 删除最后一个
+```
+范例：删除王五的一个课程
+```sql
+db.students.update({"name":"王五"}，{"$pop":{"course":1}});
+```
+8. $pull 从数组内删除一个指定内容的数据
+语法：
+```sql
+{"$pull":{"成员":"内容"}}
+```
+范例：删除王五的音乐课程
+```sql
+db.students.update({"name":"王五"}，{"$pull":"音乐"});
+```
+9. $pullAll  
+一次性删除多个内容
+
+语法：
+```sql
+{"$pullAll":{"成员":[内容1，内容2 ]}}
+```
+范例：删除王五的多个课程 
+```sql
+db.students.update({"name":"王五"}，{"$pullAll":{"course":["语文","数学"]}});
+```
+10. $rename  为成员名称重命名
+语法：
+```sql
+{"$rename":{"旧的成员名称"："新的成员名称"}}
+```
+范例：将张三的成员名称修改为“xingming”
+```sql
+db.students.find({"name":"张三"}，{"$rename":{"name":"xingming"}});
+```

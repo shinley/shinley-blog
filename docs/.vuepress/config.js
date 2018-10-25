@@ -1,6 +1,6 @@
 module.exports = {
   title: '陈新磊的读书笔记',
-  description: 'Just playing around',
+  description: '每天进步一点点',
   base: '/',
   themeConfig: {
     sidebarDepth: 2,

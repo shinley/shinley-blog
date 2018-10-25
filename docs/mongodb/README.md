@@ -665,7 +665,7 @@ cursor.hasNext();
 cursor.next();
 ```
 例：运用循环操作
-```
+```sql
 var cursor = db.students.find();
 while(cursor.hasNext()){
     var doc = cursor.next();

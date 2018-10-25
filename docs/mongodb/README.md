@@ -647,3 +647,66 @@ db.students.update({"name":"王五"}，{"$pullAll":{"course":["语文","数学"]
 ```sql
 db.students.find({"name":"张三"}，{"$rename":{"name":"xingming"}});
 ```
+
+## 16.游标
+游标指数据可以一行行的进行操作，类似于ResultSet
+
+mongodb使用find()函数，就可以返回游标了。
+
+使用两个函数操作：
+
+- 判断是否有下一行数据：hasNext()
+- 取出当前数据： next()
+
+例：
+```sql
+var cursor = db.students.find();
+cursor.hasNext();
+cursor.next();
+```
+例：运用循环操作
+```
+var cursor = db.students.find();
+while(cursor.hasNext()){
+    var doc = cursor.next();
+    print(doc.name);
+ //   printjson(doc);
+}
+```
+## 17.正则运算(模糊查询)
+如果要想实现模糊查询，那么必须要使用正则表达式
+
+- 基础语法： {key:正则标记}
+- 完整语法：{key:{"regex":正则标记，"$options":选项}}
+
+对于options主要是设置正则的信息查询的标记
+
+- i        忽略字母大小写
+- m     多行查找
+- x      空白字符除了被转义或在字符类中以外的完全被忽略
+- s     匹配所有的字符（.）包括换行内容
+
+范例： 查询以“谷”开头的姓名
+```sql
+db.students.find({"name": /谷/}).pretty();
+```
+范例：查询姓名含有字母A的，不区分大小写
+```sql
+db.students.find({"name":/a/i}).pretty();
+```
+完整语法这样写：
+```sql
+db.students.find().pretty({"name":{"$regex": /a/i}});
+```
+ 查询数组数据
+```sql
+db.students.find({"course": /语/}).pretty();
+```
+
+## 18.判断某个字段是否存在
+使用 $exists
+
+范例：查找具有 course属性的对象
+```sql
+db.students.find({"course":{"$exists":true}}).pretty();
+```

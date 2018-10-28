@@ -4,6 +4,7 @@ heroImage: /hero.png
 actionText: Let's Go →
 actionLink: /python/fabric
 features:
+
 - title: Python
   details: 工作中可能会用到的辅助性的工具。
 - title: Java

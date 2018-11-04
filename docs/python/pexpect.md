@@ -7,14 +7,26 @@
 
 我们使用pexpect就可以简化这种操作，让脚本替我们输入用户名和密码，简化我们使用的交互式的命令。
 
+我们以登录某台linux服务器为例, 登录时会提示输入密码, 如图所示:
+
+<img :src="$withBase('/pexpect/lg.jpg')">
+
+我们就用pexpect来简化我们的登录服务器的动作
+
 首先，安装pexpect:
+
 ```Bash
 pip install pexpect
 ```
 
-我们以登录某台linux服务器为例：
+编写lg.py脚本文件
 
 ```python
-
+#!/usr/bin/env python3
+import pexpect
+try:
+  passwd="chen"
+  process = pexpect.spawn('/usr/bin/ssh chenxinlei@192.168.55.107')
+  pexpect.expect("")
 
 ```

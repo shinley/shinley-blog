@@ -37,4 +37,4 @@ for line in lines[1:-1]
     print(line.split()[-2])
 ```
 
-check_output 函数的返回值是命令行的执行结果， 显然无法像call函数一样通过返回退出状态码表示异常情奖品， 因此, checkout_output函数通过抛出一个subprocess.CalledProcessError异常来表示命令执行出错。
+check_output 函数的返回值是命令行的执行结果， 显然无法像call函数一样通过返回退出状态码表示异常情况， 因此, checkout_output函数通过抛出一个subprocess.CalledProcessError异常来表示命令执行出错。

@@ -21,11 +21,12 @@ module.exports = {
         ]
       },
       {
-        title: 'JAVA',
+        title: 'JAVA多线程',
         collapsable: false,
         children: [
-          '/java/jvm',
-          '/java/thread'
+          '/java/thread/1.线程的生命周期详解',
+          '/java/thread/2.深入理解Thread构造数',
+          '/java/thread/3.Thread API 详细介绍',
         ]
       },
       {

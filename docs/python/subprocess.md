@@ -27,6 +27,7 @@ call函数执行的外部命令以一个字符串列表的形式进行传递， 
 check_all函数的作用与call函数类似， 区别在于异常性交下返回的形式不同。对于call函数。 可以通过捕获call命令的返回值 判断命令是否执行成功。如果成功返回0， 否则返回非0; 对于check_all函数， 如果执行成功返回0 ， 如果执行失败， 抛出subprocess.CalledProcessError异常。
 
 3. check_output
+
 上面两个函数 call和check_call函数直接将命令的输出结果输出到命令行终端， 在实际工作中，我们有时候会需要对命令的结果做进一步的处理，这个时候我们可以使用check_output
 
 ```python

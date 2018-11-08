@@ -27,6 +27,7 @@ module.exports = {
           '/java/thread/1.线程的生命周期详解',
           '/java/thread/2.深入理解Thread构造数',
           '/java/thread/3.Thread API 详细介绍',
+          '/java/thread/4.线程安全与数据同步',
         ]
       },
       {

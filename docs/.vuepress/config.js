@@ -28,6 +28,8 @@ module.exports = {
           '/java/thread/2.深入理解Thread构造数',
           '/java/thread/3.Thread API 详细介绍',
           '/java/thread/4.线程安全与数据同步',
+          '/java/thread/5.线程间通信',
+          '/java/thread/6.ThreadGroup详细讲解',
         ]
       },
       {

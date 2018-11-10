@@ -30,6 +30,7 @@ module.exports = {
           '/java/thread/4.线程安全与数据同步',
           '/java/thread/5.线程间通信',
           '/java/thread/6.ThreadGroup详细讲解',
+          '/java/thread/7.Hook线程及捕获线程异常',
         ]
       },
       {
